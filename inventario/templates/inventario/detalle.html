@@ -1,0 +1,15 @@
+{% extends 'inventario/base.html' %}
+{% block contenido %}
+<h2>{{ articulo.nombre }}</h2>
+<div class="card">
+  <p><b>Código de barra:</b> {{ articulo.codigo }}</p>
+  <p><b>Categoría:</b> {{ articulo.categoria }}</p>
+  <p><b>Stock disponible:</b> {{ articulo.stock }}</p>
+  <p><b>Ubicación / Bodega:</b> {{ articulo.ubicacion }}</p>
+  <p><b>Descripción:</b> {{ articulo.descripcion }}</p>
+  <p><b>Creado:</b> {{ articulo.creado }}</p>
+  <p><b>Última actualización:</b> {{ articulo.actualizado }}</p>
+  <a class="btn" href="{% url 'inventario:editar' articulo.pk %}">Editar</a>
+  <a class="btn grey" href="{% url 'inventario:lista' %}">Volver</a>
+</div>
+{% endblock %}

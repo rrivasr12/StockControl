@@ -13,7 +13,7 @@ env/
 .vscode/
 
 # Bases de datos locales
-#*.sqlite3
+*.sqlite3
 
 # Frontend, si corresponde
 node_modules/

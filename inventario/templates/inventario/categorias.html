@@ -8,10 +8,38 @@
   <p>No hay categorías todavía.</p>
 {% else %}
 <table>
-  <tr><th>Nombre</th><th>Descripción</th></tr>
-  {% for c in categorias %}
-  <tr><td>{{ c.nombre }}</td><td>{{ c.descripcion }}</td></tr>
-  {% endfor %}
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Artículos</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for c in categorias %}
+    <tr>
+      <td>{{ c.nombre }}</td>
+      <td>{{ c.descripcion|default:"—" }}</td>
+      <td>{{ c.articulos.count }}</td>
+
+      <td class="actions">
+        <a href="{% url 'inventario:categoria_detalle' c.pk %}">
+          Ver
+        </a>
+
+        <a href="{% url 'inventario:categoria_editar' c.pk %}">
+          Editar
+        </a>
+
+        <a href="{% url 'inventario:categoria_eliminar' c.pk %}">
+          Eliminar
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endif %}
 {% endblock %}

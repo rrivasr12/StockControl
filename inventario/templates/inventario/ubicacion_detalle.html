@@ -1,0 +1,41 @@
+{% extends 'inventario/base.html' %}
+
+{% block contenido %}
+<h2>{{ ubicacion.nombre }}</h2>
+
+<div class="card">
+  <p>
+    <b>Descripción:</b>
+    {{ ubicacion.descripcion|default:"Sin descripción" }}
+  </p>
+
+  <p>
+    <b>Artículos asociados:</b>
+    {{ ubicacion.articulos.count }}
+  </p>
+
+  <p>
+    <b>Creada:</b>
+    {{ ubicacion.creado }}
+  </p>
+
+  <p>
+    <b>Última actualización:</b>
+    {{ ubicacion.actualizado }}
+  </p>
+
+  <a
+    class="btn"
+    href="{% url 'inventario:ubicacion_editar' ubicacion.pk %}"
+  >
+    Editar
+  </a>
+
+  <a
+    class="btn grey"
+    href="{% url 'inventario:ubicacion_lista' %}"
+  >
+    Volver
+  </a>
+</div>
+{% endblock %}

@@ -24,18 +24,9 @@
     {{ ubicacion.actualizado }}
   </p>
 
-  <a
-    class="btn"
-    href="{% url 'inventario:ubicacion_editar' ubicacion.pk %}"
-  >
-    Editar
-  </a>
-
-  <a
-    class="btn grey"
-    href="{% url 'inventario:ubicacion_lista' %}"
-  >
-    Volver
-  </a>
+  {% if not static_export %}
+  <a class="btn" href="{{ pages_prefix }}{% url 'inventario:ubicacion_editar' ubicacion.pk %}">Editar</a>
+  {% endif %}
+  <a class="btn grey" href="{{ pages_prefix }}{% url 'inventario:ubicacion_lista' %}">Volver</a>
 </div>
 {% endblock %}

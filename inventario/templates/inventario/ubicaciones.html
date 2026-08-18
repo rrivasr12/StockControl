@@ -2,7 +2,9 @@
 {% block contenido %}
 <div class="top">
   <h2>Ubicaciones</h2>
-  <a class="btn" href="{% url 'inventario:ubicacion_crear' %}">+ Nueva ubicación</a>
+  {% if not static_export %}
+  <a class="btn" href="{{ pages_prefix }}{% url 'inventario:ubicacion_crear' %}">+ Nueva ubicación</a>
+  {% endif %}
 </div>
 {% if not ubicaciones %}
   <p>No hay ubicaciones todavía.</p>
@@ -25,17 +27,11 @@
       <td>{{ u.articulos.count }}</td>
 
       <td class="actions">
-        <a href="{% url 'inventario:ubicacion_detalle' u.pk %}">
-          Ver
-        </a>
-
-        <a href="{% url 'inventario:ubicacion_editar' u.pk %}">
-          Editar
-        </a>
-
-        <a href="{% url 'inventario:ubicacion_eliminar' u.pk %}">
-          Eliminar
-        </a>
+        <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_detalle' u.pk %}">Ver</a>
+        {% if not static_export %}
+        <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_editar' u.pk %}">Editar</a>
+        <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_eliminar' u.pk %}">Eliminar</a>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}

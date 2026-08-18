@@ -1,0 +1,67 @@
+name: Publicar StockControl
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v6
+
+      - name: Instalar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Crear base de datos
+        run: |
+          python manage.py migrate --settings=config.settings_pages
+          python manage.py loaddata pages_data --settings=config.settings_pages
+
+      - name: Generar sitio estático
+        run: |
+          python manage.py distill-local public \
+            --settings=config.settings_pages \
+            --collectstatic \
+            --force
+          touch public/.nojekyll
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir sitio
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

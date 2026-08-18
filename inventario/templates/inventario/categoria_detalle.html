@@ -23,19 +23,9 @@
     <b>Última actualización:</b>
     {{ categoria.actualizado }}
   </p>
-
-  <a
-    class="btn"
-    href="{% url 'inventario:categoria_editar' categoria.pk %}"
-  >
-    Editar
-  </a>
-
-  <a
-    class="btn grey"
-    href="{% url 'inventario:categoria_lista' %}"
-  >
-    Volver
-  </a>
+  {% if not static_export %}
+  <a class="btn" href="{{ pages_prefix }}{% url 'inventario:categoria_editar' categoria.pk %}">Editar</a>
+  {% endif %}
+  <a class="btn grey" href="{{ pages_prefix }}{% url 'inventario:categoria_lista' %}" >Volver</a>
 </div>
 {% endblock %}

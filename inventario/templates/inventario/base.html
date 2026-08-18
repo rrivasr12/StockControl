@@ -35,16 +35,18 @@
 </style>
 </head>
 <body>
-{% if user.is_authenticated %}
+{% if user.is_authenticated or static_export %}
 <div class="nav">
-  <a class="brand" href="{% url 'inventario:articulo_lista' %}">StockControl</a>
-  <a href="{% url 'inventario:articulo_lista' %}">Artículos</a>
-  <a href="{% url 'inventario:categoria_lista' %}">Categorías</a>
-  <a href="{% url 'inventario:ubicacion_lista' %}">Ubicaciones</a>
-  <form method="post" action="{% url 'inventario:logout' %}" class="logout-form">
+  <a class="brand" href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">StockControl</a>
+  <a href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">Artículos</a>
+  <a href="{{ pages_prefix }}{% url 'inventario:categoria_lista' %}">Categorías</a>
+  <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_lista' %}">Ubicaciones</a>
+  {% if not static_export %}
+  <form method="post" action="{{ pages_prefix }}{% url 'inventario:logout' %}" class="logout-form">
     {% csrf_token %}
     <button type="submit" class="logout-button">Salir</button>
   </form>
+  {% endif %}
 </div>
 {% endif %}
 <div class="container">

@@ -25,3 +25,7 @@ Thumbs.db
 *.pyc
 instance/
 *.db
+
+# Archivos generados para GitHub Pages
+/public/
+/staticfiles/

@@ -9,7 +9,9 @@
   <p><b>Descripción:</b> {{ articulo.descripcion }}</p>
   <p><b>Creado:</b> {{ articulo.creado }}</p>
   <p><b>Última actualización:</b> {{ articulo.actualizado }}</p>
-  <a class="btn" href="{% url 'inventario:articulo_editar' articulo.pk %}">Editar</a>
-  <a class="btn grey" href="{% url 'inventario:articulo_lista' %}">Volver</a>
+  {% if not static_export %}
+  <a class="btn" href="{{ pages_prefix }}{% url 'inventario:articulo_editar' articulo.pk %}">Editar</a>
+  {% endif %}
+  <a class="btn grey" href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">Volver</a>
 </div>
 {% endblock %}

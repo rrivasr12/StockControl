@@ -13,8 +13,8 @@
   "model": "inventario.categoria",
   "pk": 2,
   "fields": {
-    "nombre": "Albañilería",
-    "descripcion": "para albañil",
+    "nombre": "AlbaÃ±ilerÃ­a",
+    "descripcion": "para albaÃ±il",
     "creado": "2026-07-28T06:53:18.077Z",
     "actualizado": "2026-07-28T06:53:18.077Z"
   }

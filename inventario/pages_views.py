@@ -10,6 +10,7 @@ def login_page(request):
             "form": AuthenticationForm(),
             "static_export": True,
             "pages_prefix": "/StockControl",
+            "hide_nav": True,
         },
     )
     

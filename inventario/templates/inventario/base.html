@@ -35,7 +35,7 @@
 </style>
 </head>
 <body>
-{% if user.is_authenticated or static_export %}
+{% if not hide_nav and (user.is_authenticated or static_export) %}
 <div class="nav">
   <a class="brand" href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">StockControl</a>
   <a href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">Artículos</a>

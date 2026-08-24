@@ -35,21 +35,23 @@
 </style>
 </head>
 <body>
-{% if not hide_nav and (user.is_authenticated or static_export) %}
-<div class="nav">
-  <a class="brand" href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">StockControl</a>
-  <a href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">Artículos</a>
-  <a href="{{ pages_prefix }}{% url 'inventario:categoria_lista' %}">Categorías</a>
-  <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_lista' %}">Ubicaciones</a>
-  {% if static_export %}
-    <a href="{{ pages_prefix }}{% url 'inventario:login' %}">Salir</a>
-  {% else %}
-    <form method="post" action="{{ pages_prefix }}{% url 'inventario:logout' %}" class="logout-form">
-      {% csrf_token %}
-	    <button type="submit" class="logout-button">Salir</button>
-    </form>
+{% if not hide_nav %}
+  {% if user.is_authenticated or static_export %}
+  <div class="nav">
+    <a class="brand" href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">StockControl</a>
+    <a href="{{ pages_prefix }}{% url 'inventario:articulo_lista' %}">Artículos</a>
+    <a href="{{ pages_prefix }}{% url 'inventario:categoria_lista' %}">Categorías</a>
+    <a href="{{ pages_prefix }}{% url 'inventario:ubicacion_lista' %}">Ubicaciones</a>
+    {% if static_export %}
+      <a href="{{ pages_prefix }}{% url 'inventario:login' %}">Salir</a>
+    {% else %}
+      <form method="post" action="{{ pages_prefix }}{% url 'inventario:logout' %}" class="logout-form">
+        {% csrf_token %}
+	      <button type="submit" class="logout-button">Salir</button>
+      </form>
+    {% endif %}
+  </div>
   {% endif %}
-</div>
 {% endif %}
 <div class="container">
   {% block contenido %}{% endblock %}

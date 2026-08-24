@@ -6,13 +6,25 @@
 </div>
 <div class="card" style="margin:20px auto;">
   {% if error %}<div class="msg">{{ error }}</div>{% endif %}
+  {% if static_export %}
+  <p>
+    <label>Usuario:</label>
+    <input type="text" value="demo" disabled>
+  </p>
+  <p>
+    <label>Contraseña:</label>
+    <input type="password" value="demo" disabled>
+  </p>
+  <a class="btn" href="{{ pages_prefix }}/articulos/">Entrar</a>
+  {% else %}
   <form method="post">
     {% csrf_token %}
     {% if next %}
       <input type="hidden" name="next" value="{{ next }}">
-    {% endif %}    
+    {% endif %}
     {{ form.as_p }}
     <button class="btn" type="submit">Entrar</button>
   </form>
+  {% endif %}
 </div>
 {% endblock %}

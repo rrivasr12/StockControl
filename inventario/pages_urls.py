@@ -7,8 +7,8 @@ app_name = "inventario"
 urlpatterns = [
     distill_path(
         "",
-        pages_views.articulo_lista,
-        name="inicio",
+        pages_views.login_page,
+        name="login",
         distill_file="index.html",
     ),
     distill_path(

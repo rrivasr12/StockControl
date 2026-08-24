@@ -1,8 +1,18 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.contrib.auth.forms import AuthenticationForm
 from .models import Articulo, Categoria, Ubicacion
 
-
+def login_page(request):
+    return render(
+        request,
+        "inventario/login.html",
+        {
+            "form": AuthenticationForm(),
+            "static_export": True,
+            "pages_prefix": "/StockControl",
+        },
+    )
+    
 def articulo_lista(request):
     return render(
         request,
